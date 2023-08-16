@@ -1,0 +1,39 @@
+     1                                  ; alive.asm
+     2                                  DEFAULT REL
+     3                                  extern printf
+     4                                  section .data
+     5 00000000 48656C6C6F2C20776F-     	msg1	db	"Hello, world!",0
+     5 00000009 726C642100         
+     6 0000000E 6501000000000000        	radius	dq	357
+     7 00000016 1F85EB51B81E0940        	pi		dq	3.14
+     8 0000001E 25730A00                	msg_fmt1	db	"%s",10,0
+     9 00000022 256C660A00              	msg_flt		db	"%lf",10,0
+    10 00000027 25640A00                	msg_int		db	"%d",10,0
+    11                                  section .bss
+    12                                  section .text
+    13                                  	global main
+    14                                  main:
+    15 00000000 55                      	push	rbp
+    16 00000001 4889E5                  	mov		rbp,rsp
+    17                                  	;print msg1
+    18 00000004 B800000000              	mov		rax, 0
+    19 00000009 48BE-                   	mov 	rsi, msg1
+    19 0000000B [0000000000000000] 
+    20 00000013 48BF-                   	mov		rdi, msg_fmt1
+    20 00000015 [1E00000000000000] 
+    21 0000001D E8(00000000)            	call printf
+    22                                  	;print integer 
+    23 00000022 B800000000              	mov		rax, 0
+    24 00000027 488B35(0E000000)        	mov 	rsi, [radius]
+    25 0000002E 48BF-                   	mov		rdi, msg_int
+    25 00000030 [2700000000000000] 
+    26 00000038 E8(00000000)            	call printf
+    27                                  	;print float
+    28 0000003D B801000000              	mov		rax, 1
+    29 00000042 F30F7E05(16000000)      	movq 	xmm0, [pi]
+    30 0000004A 48BF-                   	mov		rdi, msg_flt
+    30 0000004C [2200000000000000] 
+    31 00000054 E8(00000000)            	call 	printf
+    32 00000059 4889EC                  	mov 	rsp, rbp
+    33 0000005C 5D                      	pop 	rbp
+    34 0000005D C3                      	ret

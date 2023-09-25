@@ -7,7 +7,7 @@ int main(void){
 
     c = 10;
     c = 0xa;
-    c = 0b00010010;
+    c = 0b00010010;//Representações binárias são dependendentes de implementação. Evitar seu uso
     c = '\n';
 
     printf("O valor contido em c e %i\n", c); //Long Unsigned
